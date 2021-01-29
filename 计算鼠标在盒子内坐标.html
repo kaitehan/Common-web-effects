@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        var box = document.querySelector('.box');
+        var boxX = box.offsetLeft,
+            boxY = box.offsetTop;
+        var boxW = box.offsetWidth,
+            boxH = box.offsetHeight;
+        console.log(boxW);
+        document.addEventListener('mousemove', function (e) {
+            var x = e.pageX - boxX;
+            var y = e.pageY - boxY;
+            if (0 <= x && x <= boxW && 0 <= y && y <= boxH) {
+                console.log(x + ',' + y);
+            }
+
+        })
+    </script>
+</body>
+
+</html>

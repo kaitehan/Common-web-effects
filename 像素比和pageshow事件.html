@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 查看像素比
+        console.log(window.devicePixelRatio);
+
+
+        // load和pageshow的区别
+        window.addEventListener('load',function(){
+            alert(1111111);
+        })
+        // pageshow 页面从缓存加载也会触发事件,而load不会
+        window.addEventListener('pageshow',function(){
+            console.log(111);
+        })
+    </script>
+    <a href="http://www.baidu.com">链接</a>
+</body>
+</html>

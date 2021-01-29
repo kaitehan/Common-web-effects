@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slider-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 100px;
+            margin-left: 600px;
+            background-color: pink;
+        }
+
+        .header {
+            height: 200px;
+            margin-top: 10px;
+            background-color: purple;
+        }
+
+        .banner {
+            height: 300px;
+            margin-top: 10px;
+            background-color: skyblue;
+        }
+
+        .main {
+            height: 5100px;
+            margin-top: 10px;
+            background-color: #ccc;
+        }
+
+        .goBack {
+            display: none;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            bottom: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-bar">
+        <span class="goBack">返回顶部</span>
+    </div>
+    <div class="header w">
+        header
+    </div>
+    <div class="banner w">
+        banner
+    </div>
+    <div class="main w">
+        主体区域
+    </div>
+    <script>
+        // 1.获取元素
+        var sliderbar = document.querySelector('.slider-bar');
+        var banner = document.querySelector('.banner');
+        // banner.offsetTop 就是被卷去头部的大小 一定要写到滚动事件的外面
+        var bannerTop = banner.offsetTop;
+        var sliderbarTop = sliderbar.offsetTop - bannerTop;
+        // 获取main元素
+        var main = document.querySelector('.main');
+        var goBack = document.querySelector('.goBack');
+        // 获取初始main.offsetTop
+        var mainTop = main.offsetTop;
+        // 2. 页面滚动事件
+        document.addEventListener('scroll', function () {
+            // window.pageYOffset  页面被去的头部
+            // 3.当页面滚动到banner 模块，就将侧边栏改成固定定位
+            if (window.pageYOffset > bannerTop) {
+                sliderbar.style.position = 'fixed';
+                sliderbar.style.top = sliderbarTop + 'px';
+            } else {
+                sliderbar.style.position = 'absolute';
+                sliderbar.style.top = '50%';
+            }
+            // 4.当页面滚动到MAIN盒子，就显示goBack模块
+            if (window.pageYOffset > mainTop) {
+                goBack.style.display = 'block';
+            } else {
+                goBack.style.display = 'none';
+            }
+        })
+        goBack.addEventListener('click', function () {
+            // window.scroll(x,y) 窗口移动函数，里面的X,Y不跟单位 直接写数字
+            // window.scroll(0, 0);
+            // 因为是窗口滚动 所以对象是window
+            animate(window, 0);
+        });
+
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                    // 步长值写到定时器里面
+                    // 把步长值该为整数
+                    var step = (target - window.pageYOffset) / 10;
+                    // 当step>0时往向上取值，反之则向小取值
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+
+                    if (window.pageYOffset === target) {
+                        // 停止动画，本质就是停止定时器
+                        clearInterval(obj.timer);
+                        // 回调函数放到定时器结束后执行，先判断是否有回调函数，有则执行
+                        // if(callback){
+                        //     callback();
+                        // }
+                        // &&是短路运算符，当遇到一个不为真时就停止后面的操作
+                        callback && callback();
+                    }
+                    // 将每次步长值该为逐渐变小的值  
+                    // obj.style.left = window.pageYOffset + step + 'px';
+                    // window.scroll(x,y) 窗口移动函数，里面的X,Y不跟单位 直接写数字
+                    window.scroll(0, window.pageYOffset + step);
+                },
+                15)
+        }
+    </script>
+</body>
+
+</html>

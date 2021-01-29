@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        1111
+    </div>
+    <script>
+        // offset 与 style 的区别
+        var box = document.querySelector('.box');
+        // 使用offset获取元素大小
+        console.log(box.offsetWidth);//得到元素现有的数据 offsetWidth值中包括border padding；不带单位；  只读，不能赋值
+
+        // 使用style给元素改变样式
+        console.log(box.style.width);//只能得到行内样式表里的数据; 值不包括border paddiing; 带单位；  可读写，能够赋值
+    </script>
+</body>
+</html>

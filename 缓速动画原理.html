@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        span {
+            display: block;
+            position: absolute;
+            top: 200px;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn500">500点击</button>
+    <button class="btn800">800点击</button>
+
+    <span></span>
+    <script>
+        function animate(obj, target) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                    // 步长值写到定时器里面
+                    // 把步长值该为整数
+                    var step = (target - obj.offsetLeft) / 10;
+                    // 当step>0时往向上取值，反之则向小取值
+                    step = step > 0 ? Math.ceil(step):Math.floor(step);
+
+                    if (obj.offsetLeft === target) {
+                        // 停止动画，本质就是停止定时器
+                        clearInterval(obj.timer);
+                    }
+                    // 将每次步长值该为逐渐变小的值  
+                    obj.style.left = obj.offsetLeft + step + 'px';
+                },
+                15)
+        }
+        var span = document.querySelector('span');
+        var btn1 = document.querySelector('.btn500');
+        var btn2 = document.querySelector('.btn800');
+        // 调用封装函数
+
+        btn1.addEventListener('click', function () {
+            animate(span, 500);
+        })
+        btn2.addEventListener('click', function () {
+            animate(span, 800);
+        })
+        // 匀速动画就是 盒子当前位置加上一个固定的步长
+        // 缓速动画就是 盒子当前的位置加上一个变化（小）的步长   （目标位置-当前位置）/10
+    </script>
+</body>
+
+</html>

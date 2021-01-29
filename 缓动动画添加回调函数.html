@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .sliderbar {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 50px;
+            height: 100px;
+            background-color: pink;
+        }
+        span {
+            display: block;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #ddd;
+        }
+        .con {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            width: 200px;
+            height: 50px;
+            text-align: left;
+            line-height: 50px;
+            background-color: pink;
+            z-index: -1;
+        }
+    </style>
+    <script src="js/animate.js"></script>
+</head>
+<body>
+    <div class="sliderbar">
+        <span>←</span>
+        <div class="con">问题反馈</div>
+    </div>
+    <script>
+        var slicerbar = document.querySelector('.sliderbar');
+        var span = document.querySelector('span');
+        var con = document.querySelector('.con');
+
+        span.addEventListener('mouseenter',function(){
+            animate(con,-150,function(){
+                // 当动画完毕时，改变span中的内容
+                slicerbar.children[0].innerHTML = '→';
+            });
+        })
+        span.addEventListener('mouseleave',function(){
+            animate(con,0,function(){
+                slicerbar.children[0].innerHTML = '←';
+            });
+            
+        })
+    </script>
+</body>
+</html>

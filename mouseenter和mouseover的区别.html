@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            background-color: pink;
+        }
+        .son {
+            width: 50px;
+            height: 50px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <script>
+        var father = document.querySelector('.father');
+        var son = document.querySelector('.son');
+
+        father.addEventListener('mouseover',function(){
+            console.log(11111);
+        })//当盒子经过自身盒子和子盒子时都会触发这个事件
+
+        father.addEventListener('mouseenter',function(){
+            console.log(22222);
+        })//只有当盒子经过自身盒子是会触发事件，事件不会冒泡     mouseleave
+        father.onmouseleave = function(){
+            console.log(33333);
+        }
+    </script>
+</body>
+</html>
